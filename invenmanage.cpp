@@ -4,7 +4,6 @@
 using namespace std;
 
 
-
 struct itemEntry
 {
    char name[40];
@@ -12,6 +11,9 @@ struct itemEntry
    int unit_price;
    int copies,product_id;
 };
+
+
+
 class Cafe
 {
 
@@ -23,52 +25,70 @@ public:
     {
     numitem=0;
     }
+
    void insertItem(char itemname[],char company[],int money,int copie,int pid);
    void deleteItem(char itemname[],int pid);
    itemEntry *search(char itemname[],int pid);
    void updeteItem(char itemname[],int pid,int total, int money);
+
+
 };
 
-void Cafe::insertItem(char itemname[],char company[],int pid,int copie,int money);
+
+
+void Cafe::insertItem(char itemname[],char company[],int pid,int copie,int money){
           strcpy(data[numitem].name,itemname);
           strcpy(data[numitem].company,company);
-          data[numItem].product_id=pid;
-          data[numItem].copies=copie;
-          data[numItem].unit_price=money;
+          data[numitem].product_id=pid;
+          data[numitem].copies=copie;
+          data[numitem].unit_price=money;
         cout<<"\n\t\t ITEM INSERTD SUCCESSFULLY \n";
         numitem++;
+}
+
+
 
 void Cafe::deleteItem(char itemname[],int pid){
 int i;
 for(i=0;i<numitem; i++)
     {
-    if((itemname,data[i].name)==0)&&(data[i].product_id==pid)
-        {
 
-          data[i].copies--;
+    if(((itemname,data[i].name)==0)&&(data[i].product_id==pid)){
+                  data[i].copies--;
            cout<<"\n\t\t ITEM DELETED SUCCESSFULY \n";
-           return 0;
-        }
     }
+
+
+
+    else{
     cout<<"\n\t\t\t ITEM NOT FOUND \n";
+    }
+
+}
+
 }
 
 
 itemEntry *Cafe ::search(char itemname[],int pid)
 {
+
 int i;
 for(i=0;i<numitem; i++)
     {
      if((strcmp(itemname,data[i].name)==0)&&(data[i].product_id==pid))
-        return &database[i];
+        return &data[i];
    }
-   return null;
+   return NULL;
+
 }
+
+
+
 void Cafe:: updeteItem(char itemname[],int pid,int total, int money)
 {
 
 itemEntry *item=search(itemname,pid);
-if(item==null)
+if(item==NULL)
     {
     cout<<"\n\t\t\t ITEM NOT FOUND \n";
     return;
@@ -80,7 +100,7 @@ if(item==null)
 int main(){
 
     Cafe caf;
-    char[30],company[30];
+    char name[30],company[30];
     int product_id,copies,unit_price,option;
     do{
 
@@ -107,7 +127,7 @@ int main(){
                   cin>>copies;
                   cout<<"\n\t\t\t unit price per Item:";
                   cin>>unit_price;
-                  caf.insertitem(name,company,product_id,copies,unit_price);
+                  caf.insertItem(name,company,product_id,copies,unit_price);
                   break;
 
 
@@ -116,7 +136,7 @@ int main(){
                   cin.getline(name,80);
                   cout<<"\n\t\t\t enter product ID:";
                   cin>>product_id;
-                  caf.deleteitem(name,product_id);
+                  caf.deleteItem(name,product_id);
                   break;
 
 
@@ -128,7 +148,7 @@ int main(){
                   cin>>product_id;
                   itemEntry *test;
                   test=caf.search(name,product_id);
-                  if(test!=null){
+                  if(test!=NULL){
 
                     cout<<"\n\t  ---------->SERCHING RESULT<----------------";
                     cout<<"\n\t\t\t  ITEM FOUND "<<"\n\t\t\t name of the Item:"<<test->name<<"\n\t\t\t company name:"
@@ -151,7 +171,7 @@ int main(){
                   cin>>copies;
                   cout<<"\n\t\t\t enter new price:";
                   cin>>unit_price;
-                  caf.updateitem(name,product_id,copies,unit_price);
+                  caf.updeteItem(name,product_id,copies,unit_price);
                   break;
 
          }
